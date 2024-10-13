@@ -1,0 +1,146 @@
+.footer-middle {
+    padding-top: 2.25rem;
+    padding-bottom: 2.25rem;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.pt-90 {
+    padding-top: 90px !important;
+}
+
+.my-account__address-list {
+    display: flex;
+    gap: 1.625rem;
+}
+
+.form-floating>.form-control,
+.form-floating>.form-select {
+    height: 48px;
+}
+
+img.pc__img {
+    border-radius: 10px;
+}
+
+.swatch-color {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 5px;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+    border: 2px solid transparent;
+    /* No border by default */
+}
+
+.swatch-color.active {
+    border: 2px solid;
+    /* Add a border when active */
+}
+
+.filled-heart {
+    color: #FF0000;
+}
+
+.qty-control__reduce_cart,
+.qty-control__increase_cart {
+    position: absolute;
+    top: 0;
+    width: .75rem;
+    padding: 0;
+    cursor: pointer;
+    user-select: none;
+    -ms-user-select: none;
+}
+
+.qty-control__reduce {
+    left: 0;
+}
+
+.coupon-massege, .text-success {
+    color: #33b206 !important;
+}
+
+.coupon-massege, .text-danger {
+    color: #fa1d0b !important;
+}
+
+.coupon-container {
+    margin-bottom: 20px;
+}
+
+.countdown-num {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.countdown-word {
+    font-size: 12px;
+    color: #555;
+}
+
+.share-button {
+    position: relative;
+    display: inline-block;
+
+    
+}
+
+.share{
+    
+    align-items: center;
+    text-transform: uppercase;
+    gap: 0.625rem;
+    padding: 0 0 0.625rem;
+    border: 0;
+    background-color: transparent;
+    font-weight: 500;
+}
+
+.social-share-buttons {
+    display: flex;
+    flex-direction: row;
+    /* Display icons in a row */
+    gap: 10px;
+    /* Add space between the icons */
+    position: absolute;
+    top: 100%;
+    /* Position directly below the share button */
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    /* Start with icons moved up */
+    transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+}
+
+.share-button:hover .social-share-buttons {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    /* Move icons down into place */
+}
+
+.share-button {
+   
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.social-button {
+    display: inline-block;
+    font-size: 20px;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.social-button:hover {
+    color: #007bff;
+    /* Change to your preferred hover color */
+}

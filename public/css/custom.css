@@ -1,0 +1,320 @@
+body {
+    zoom: 90% !important;
+}
+
+#logo_header_mobile {
+    max-width: 190px;
+}
+
+.wg-table.table-all-user>* {
+    min-width: 1260px;
+}
+
+.wgp-pagination svg {
+    height: 20px;
+}
+
+.wgp-pagination p {
+    font-size: 16px;
+}
+
+.pagination {
+    margin-left: 30px;
+
+    .page-link {
+        padding: 1.1rem;
+        font-size: 16px;
+    }
+}
+
+.swal-button--confirm {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}
+
+.swal-button--confirm.active,
+.swal-button--confirm:active,
+.show>.swal-button--confirm.dropdown-toggle,
+.swal-button--confirm:hover {
+    background-color: #b02a37 !important;
+    border-color: #a52834 !important;
+    color: #fff;
+}
+
+.swal-footer {
+    text-align: center;
+}
+
+.table-bordered>:not(caption)>*>* {
+    border-width: inherit;
+    line-height: 32px;
+    font-size: 14px;
+    border: 1px solid #e1e1e1;
+    vertical-align: middle;
+}
+
+.table-striped .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-striped {
+    min-width: 1200px;
+}
+
+.table-striped th:nth-child(2),
+.table-striped td:nth-child(2) {
+    width: 250px;
+    padding-bottom: 18px;
+}
+
+.pname {
+    display: flex;
+    gap: 13px;
+}
+
+.view-icon {
+    width: 20px;
+    margin: 0 auto;
+}
+
+.wg-table.table-all-user>* {
+    min-width: 1260px;
+}
+
+/*------*/
+.wgp-pagination svg {
+    height: 20px;
+}
+
+.wgp-pagination p {
+    font-size: 16px;
+}
+
+.pagination {
+    margin-left: 30px;
+
+    .page-link {
+        padding: 1.1rem;
+        font-size: 16px;
+    }
+}
+
+.swal-button--confirm {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}
+
+.swal-button--confirm.active,
+.swal-button--confirm:active,
+.show>.swal-button--confirm.dropdown-toggle,
+.swal-button--confirm:hover {
+    background-color: #b02a37 !important;
+    border-color: #a52834 !important;
+    color: #fff;
+}
+
+.swal-footer {
+    text-align: center;
+}
+
+.table-bordered>:not(caption)>*>* {
+    border-width: inherit;
+    line-height: 32px;
+    font-size: 14px;
+    border: 1px solid #e1e1e1;
+    vertical-align: middle;
+}
+
+.table-striped .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-striped {
+    min-width: 1200px;
+}
+
+.table-striped th:nth-child(2),
+.table-striped td:nth-child(2) {
+    width: 120px;
+    padding-bottom: 18px;
+}
+
+.pname {
+    display: flex;
+    gap: 13px;
+}
+
+.view-icon {
+    width: 20px;
+    margin: 0 auto;
+}
+
+.select2-container--default .select2-selection--multiple {
+    background-color: white;
+    border: 1px solid #ecf0f4 !important;
+    border-radius: 12px !important;
+    cursor: pointer;
+    position: relative;
+    padding: 19px 27px;
+
+}
+
+.select2-results {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    color: #111;
+    text-transform: capitalize;
+    cursor: pointer;
+
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+
+    padding: 5px 20px !important;
+    background-color: white !important;
+    font-size: 12px !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 5px !important;
+
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+
+    border-color: white !important;
+    padding-top: 5px;
+
+}
+
+
+
+/* Custom table styling */
+.custom-table th {
+    width: 20%;
+    /* Reduce the width of the header column */
+    white-space: nowrap;
+    /* Prevent text from wrapping in headers */
+    text-align: left;
+    /* Align the text to the left */
+    background-color: #f1f1f1;
+    /* Optional background color for the headers */
+    padding: 8px;
+    /* Padding for table headers */
+}
+
+.custom-table td {
+    width: 80%;
+    /* Make the content cells take the remaining width */
+    padding: 8px;
+    /* Padding for content cells */
+}
+
+/* Optional: Add some padding and border styling */
+.custom-table {
+    width: 100%;
+    /* Set the width of the table */
+    border-collapse: collapse;
+    /* Collapse table borders */
+}
+
+.custom-table th, .custom-table td {
+    border: 1px solid #ddd;
+    /* Light border between cells */
+}
+
+/* Optional: Add hover effect on rows */
+.custom-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+form.form-style-1>*>*:first-child {
+    width: 100%;
+    max-width: 300px;
+}
+
+form.form-style-2>*>*:first-child {
+    width: 100%;
+}
+
+#moreFeatures {
+    display: block;
+    width: 100%;
+}
+
+.body-title1 {
+    color: var(--Heading);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.body-title2 {
+    color: var(--Heading);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+/* Description Field */
+.description {
+    display: block;
+    /* Makes the description field a block element */
+    width: 100%;
+    /* Makes it take full width of the parent container */
+    margin-bottom: 20px !important;
+    /* Adds space below */
+    box-sizing: border-box;
+    /* Includes padding and borders within the width */
+    display: flex;
+    /* Makes the elements align properly in the column */
+    flex-direction: column;
+}
+
+/* Quill Editor Styling */
+#editor {
+    min-height: 250px;
+    /* Starts at 200px height */
+    width: 100%;
+    /* Full width */
+    border: 1px solid #ecf0f4;
+    border-radius: 12px;
+    padding: 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    /* Ensures no scrollbars appear inside the editor */
+    margin-bottom: 10px;
+}
+
+.ql-toolbar.ql-snow {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: none !important;
+    border-radius: 12px !important;
+    margin-bottom: 5px;
+    
+}
+
+.ql-container {
+    width: 100%;
+    box-sizing: border-box;
+}
