@@ -348,7 +348,8 @@
                     </a>
                 </li>
                 <li class="sub-menu-item">
-                    <a href="" class="{{ Route::currentRouteName() == 'edit.affiliates' ? 'active' : '' }}">
+                    <a href="{{ route('edit.affiliates') }}"
+                        class="{{ Route::currentRouteName() == 'edit.affiliates' ? 'active' : '' }}">
                         <div class="text">Affiliates</div>
                     </a>
                 </li>

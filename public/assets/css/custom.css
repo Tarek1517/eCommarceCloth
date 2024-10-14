@@ -144,3 +144,10 @@ img.pc__img {
     color: #007bff;
     /* Change to your preferred hover color */
 }
+
+.custom-divider {
+    border: 0;
+    height: 1px;
+    background: #ccc; /* Light grey color */
+    margin: 20px 0;
+}

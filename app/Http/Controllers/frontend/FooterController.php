@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use \App\Models\Career;
 
 class FooterController extends Controller
 {
@@ -12,7 +13,9 @@ class FooterController extends Controller
      */
     public function index()
     {
-        return view('frontend.page.careers');
+        $data = [];
+        $data['careerContents'] = Career::first();
+        return view('frontend.page.careers', $data);
     }
 
     public function affiliates()

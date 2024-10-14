@@ -258,8 +258,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/pending/faddress/{id}', [FaddressController::class, 'pendingFaddress'])->name('pending.faddress');
 
     Route::get('/edit/careers', [AdminFooterController::class, 'edit_careers'])->name('edit.careers');
-    Route::post('/upload-image/{id}', [AdminFooterController::class, 'uploadImage'])->name('upload.image');
-    Route::post('/store/career', [AdminFooterController::class, 'store_career'])->name('store.career');
+    Route::post('/store/career/{id}', [AdminFooterController::class, 'update_career'])->name('store.career');
+
+    Route::get('/edit/affiliates', [AdminFooterController::class, 'edit_affiliates'])->name('edit.affiliates');
 
 
 });
