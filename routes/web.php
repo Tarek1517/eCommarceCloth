@@ -261,7 +261,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/store/career/{id}', [AdminFooterController::class, 'update_career'])->name('store.career');
 
     Route::get('/edit/affiliates', [AdminFooterController::class, 'edit_affiliates'])->name('edit.affiliates');
+    Route::post('/store/affiliates/{id}', [AdminFooterController::class, 'update_affiliate'])->name('store.affiliate');
 
+    Route::get('/edit/cService', [AdminFooterController::class, 'edit_cService'])->name('edit.cService');
+    Route::post('/store/cService/{id}', [AdminFooterController::class, 'update_cService'])->name('store.cService');
+
+    Route::get('/edit/Privacy', [AdminFooterController::class, 'edit_Privacy'])->name('edit.Privacy');
+    Route::post('/store/Privacy/{id}', [AdminFooterController::class, 'update_Privacy'])->name('store.Privacy');
+
+    Route::get('/edit/gCard', [AdminFooterController::class, 'edit_gCard'])->name('edit.gCard');
+    Route::post('/store/gCard/{id}', [AdminFooterController::class, 'update_gCard'])->name('store.gCard');
 
 });
 

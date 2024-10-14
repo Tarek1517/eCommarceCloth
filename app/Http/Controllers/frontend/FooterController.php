@@ -5,6 +5,10 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use \App\Models\Career;
+use \App\Models\Affiliate;
+use \App\Models\Service;
+use \App\Models\Privacy;
+use \App\Models\GiftCard;
 
 class FooterController extends Controller
 {
@@ -20,27 +24,30 @@ class FooterController extends Controller
 
     public function affiliates()
     {
-        return view('frontend.page.affiliates');
+        $data = [];
+        $data['affiliatesContents'] = Affiliate::first();
+        return view('frontend.page.affiliates', $data);
     }
 
     public function customer_service()
     {
-        return view('frontend.page.cService');
-    }
-
-    public function find_store()
-    {
-        return view('frontend.page.fStore');
+        $data = [];
+        $data['cServiceContents'] = Service::first();
+        return view('frontend.page.cService', $data);
     }
     
     public function legal_privacy()
     {
-        return view('frontend.page.privacy');
+        $data = [];
+        $data['PrivacyContents'] = Privacy::first();
+        return view('frontend.page.privacy', $data);
     }
 
     public function gift_card()
     {
-        return view('frontend.page.gcard');
+        $data = [];
+        $data['GiftCardContents'] = GiftCard::first();
+        return view('frontend.page.gcard', $data);
     }
     
 }

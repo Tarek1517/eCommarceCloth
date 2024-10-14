@@ -128,10 +128,7 @@
                                 Account</a>
                         </li>
                     @endguest
-                    <li class="sub-menu__item"><a href="{{ route('find.store') }}"
-                            class="menu-link menu-link_us-s">Find a
-                            Store</a>
-                    </li>
+                    
                     <li class="sub-menu__item"><a href="{{ route('legal.privacy') }}"
                             class="menu-link menu-link_us-s">Legal & Privacy</a>
                     </li>

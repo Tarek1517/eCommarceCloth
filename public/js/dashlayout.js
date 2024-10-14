@@ -230,3 +230,5 @@ document.addEventListener("DOMContentLoaded", function () {
         descriptionTextarea.value = quill.root.innerHTML;
     };
 });
+
+

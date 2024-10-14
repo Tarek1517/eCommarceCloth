@@ -354,22 +354,22 @@
                     </a>
                 </li>
                 <li class="sub-menu-item">
-                    <a href="" class="{{ Route::currentRouteName() == 'edit.affiliates' ? 'active' : '' }}">
+                    <a href="{{ route('edit.cService') }}"
+                        class="{{ Route::currentRouteName() == 'edit.cService' ? 'active' : '' }}">
                         <div class="text">Customer Service</div>
                     </a>
                 </li>
+
                 <li class="sub-menu-item">
-                    <a href="" class="{{ Route::currentRouteName() == 'edit.affiliates' ? 'active' : '' }}">
-                        <div class="text">Find a Store</div>
-                    </a>
-                </li>
-                <li class="sub-menu-item">
-                    <a href="" class="{{ Route::currentRouteName() == 'edit.affiliates' ? 'active' : '' }}">
+                    <a href="{{ route('edit.Privacy') }}"
+                        class="{{ Route::currentRouteName() == 'edit.Privacy' ? 'active' : '' }}">
                         <div class="text">Privacy & Policy</div>
                     </a>
                 </li>
+
                 <li class="sub-menu-item">
-                    <a href="" class="{{ Route::currentRouteName() == 'edit.affiliates' ? 'active' : '' }}">
+                    <a href="{{ route('edit.gCard') }}"
+                        class="{{ Route::currentRouteName() == 'edit.gCard' ? 'active' : '' }}">
                         <div class="text">Gift Card</div>
                     </a>
                 </li>
