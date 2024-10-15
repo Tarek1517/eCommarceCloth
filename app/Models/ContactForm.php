@@ -10,7 +10,7 @@ class ContactForm extends Model
     use HasFactory;
     protected $fillable = [
 
-        "name","email","phone","comment","created_at"
+        "name","email","phone","comment","created_at","is_read"
 
     ];
 }

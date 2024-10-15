@@ -70,8 +70,8 @@
                                                         class="btn btn-warning"><i
                                                             class="fa-regular fa-thumbs-down"></i></a>
                                                 @else
-                                                    <a href="{{ route('active.coupons', $coupons->id) }}" title="Active" class="btn btn-success"><i
-                                                            class="fa-regular fa-thumbs-up"></i></a>
+                                                    <a href="{{ route('active.coupons', $coupons->id) }}" title="Active"
+                                                        class="btn btn-success"><i class="fa-regular fa-thumbs-up"></i></a>
                                                 @endif
                                                 <a href="{{ route('edit.coupons', $coupons->id) }}">
                                                     <div class="item edit">
@@ -80,8 +80,7 @@
                                                 </a>
                                                 <a href="{{ route('coupons.delete', $coupons->id) }}"
                                                     onclick="return confirm('Are you sure you want to delete this item?')"
-                                                    id="delete" class="item text-danger delete"><i
-                                                        class="icon-trash-2"></i>
+                                                    class="item text-danger delete"><i class="icon-trash-2"></i>
                                                 </a>
                                             </div>
                                         </td>

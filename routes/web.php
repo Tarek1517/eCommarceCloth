@@ -25,6 +25,7 @@ use App\Http\Controllers\ShopSliderController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\FaddressController;
 use App\Http\Controllers\AdminFooterController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -232,7 +233,7 @@ Route::middleware('auth')->group(function () {
 
     #user section 
     Route::get('/admin/users', [AdminController::class, 'admin_users'])->name('admin.users');
-    Route::get('/delete/admin/{id}', [AdminController::class, 'destroy'])->name('delete.admin');
+    Route::post('/admin/delete/{id}', [AdminController::class, 'destroy'])->name('delete.admin');
     Route::get('/add/admin', [AdminController::class, 'create'])->name('add.admin');
     Route::POST('/store/admin', [AdminController::class, 'store'])->name('store.admin');
 
@@ -248,6 +249,10 @@ Route::middleware('auth')->group(function () {
 
     #search 
     Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
+    Route::get('/get-notifications', [AdminController::class, 'getNotifications']);
+    Route::get('/messages/mark-as-read', [MessageController::class, 'markAsRead'])->name('messages.markAsRead');
+
+
 
     #footer section
     Route::get('/add/faddress', [FaddressController::class, 'create'])->name('add.faddress');

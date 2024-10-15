@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use \App\Models\ContactForm;
 use \App\Models\Customer;
 use \App\Models\Order;
 use \App\Models\Products;
@@ -115,6 +116,7 @@ class AdminController extends Controller
                 },
             ],
             'password' => 'required|string',
+
         ]);
 
         $data = $request->only(['name', 'email']);
@@ -144,18 +146,31 @@ class AdminController extends Controller
         }
     }
 
-    public function destroy(string $id)
+    public function destroy(Request $request, $id)
     {
-        $adminUsers = User::findOrFail($id);
 
-        $image_path = storage_path('app/public/img/' . $adminUsers->image);
+        $request->validate([
+            'old_password' => 'required',
+            'new_password_confirmation' => 'required|same:old_password',
+        ]);
 
-        if (!empty($adminUsers->image) && file_exists($image_path)) {
-            unlink($image_path);
+        $adminUser = User::where('u_type', 'admin')->findOrFail($id);
+
+        if (Hash::check($request->old_password, $adminUser->password)) {
+
+            $image_path = storage_path('app/public/img/' . $adminUser->image);
+
+            if (!empty($adminUser->image) && file_exists($image_path)) {
+                unlink($image_path);
+            }
+
+            $adminUser->delete();
+
+            return redirect()->route('admin.users')->with('success', 'Admin deleted successfully.');
+        } else {
+
+            return redirect()->route('admin.users')->with('error', 'Incorrect password. Admin deletion failed.');
         }
-
-        $adminUsers->delete();
-        return redirect()->route('admin.users')->with('success', 'Admin Delete Successfully');
     }
 
     public function destroy_customer(string $id)

@@ -202,6 +202,21 @@ $(document).ready(function () {
             return false;
         }
     });
+
+    $("#new_password_confirmation_model").keyup(function () {
+        let Pass = $("#old_password").val();
+        let conPass = $("#new_password_confirmation_model").val();
+
+        if (Pass != conPass) {
+            $("#confirm_password_model").html("Password not matching");
+            $("#confirm_password_model").css("color", "red");
+            return false;
+        } else {
+            $("#confirm_password_model").html("Password matched");
+            $("#confirm_password_model").css("color", "green");
+            return false;
+        }
+    });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -231,4 +246,47 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const deleteButtons = document.querySelectorAll(".open-delete-modal");
 
+    deleteButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            const adminId = this.getAttribute("data-id");
+            const form = document.getElementById("deleteAdminForm");
+            form.setAttribute("action", `/admin/delete/${adminId}`);
+        });
+    });
+
+    const form = document.getElementById("deleteAdminForm");
+    form.addEventListener("submit", function (e) {
+        const password = document.getElementById("old_password").value;
+        const confirmPassword = document.getElementById(
+            "new_password_confirmation"
+        ).value;
+        const errorElement = document.getElementById("confirm_password_error");
+
+        if (password !== confirmPassword) {
+            e.preventDefault();
+            errorElement.style.display = "block";
+        } else {
+            errorElement.style.display = "none";
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetchNotifications();
+});
+
+function fetchNotifications() {
+    fetch("/get-notifications")
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById("notificationCount").innerText =
+                data.newOrdersCount + data.newMessagesCount;
+            document.getElementById("orderCount").innerText =
+                data.newOrdersCount;
+            document.getElementById("messageCount").innerText =
+                data.newMessagesCount;
+        });
+}
