@@ -1,31 +1,31 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminFooterController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\FaddressController;
+use App\Http\Controllers\frontend\AboutUsController;
 use App\Http\Controllers\frontend\CartController;
+use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\frontend\CustomerController;
+use App\Http\Controllers\frontend\FooterController;
 use App\Http\Controllers\frontend\Home;
+use App\Http\Controllers\frontend\ReviewController;
 use App\Http\Controllers\frontend\ShopController;
 use App\Http\Controllers\frontend\wishlistController;
-use App\Http\Controllers\frontend\ContactController;
-use App\Http\Controllers\frontend\AboutUsController;
-use App\Http\Controllers\frontend\ReviewController;
-use App\Http\Controllers\frontend\FooterController;
+use App\Http\Controllers\HotDealController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SlidesController;
-use App\Http\Controllers\SizeController;
-use App\Http\Controllers\HotDealController;
-use App\Http\Controllers\TypeCOntroller;
 use App\Http\Controllers\ShopSliderController;
-use App\Http\Controllers\AboutController;
-use App\Http\Controllers\FaddressController;
-use App\Http\Controllers\AdminFooterController;
-use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SlidesController;
+use App\Http\Controllers\TypeCOntroller;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -78,7 +78,7 @@ Route::post('/contact/store', [ContactController::class, 'store'])->name('contac
 #about us
 Route::get('/aboutus', [AboutUsController::class, 'index'])->name('index.aboutus');
 
-#Footer Pages 
+#Footer Pages
 Route::get('/Career/info', [FooterController::class, 'index'])->name('Career.info');
 Route::get('/affiliates/info', [FooterController::class, 'affiliates'])->name('affiliates.info');
 Route::get('/customer/service', [FooterController::class, 'customer_service'])->name('customer.service');
@@ -151,6 +151,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/product/list', [ProductController::class, 'index'])->name('product.list');
     Route::get('/product/gallery', [ProductController::class, 'create_Gallery'])->name('product.gallery');
     Route::get('/delete/product/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+    Route::delete('/product/deleteSelected', [ProductController::class, 'deleteSelected'])->name('products.deleteSelected');
     Route::get('/edit/product/{id}', [ProductController::class, 'edit'])->name('edit.product');
     Route::post('/update/product/{id}', [ProductController::class, 'update'])->name('update.product');
     Route::get('/product/review', [ProductController::class, 'review'])->name('product.review');
@@ -173,6 +174,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/order/lists', [OrderController::class, 'create'])->name('order.lists');
     Route::get('/order/details/{order_id}', [OrderController::class, 'show'])->name('order.details');
     Route::delete('/delete/order/{id}', [OrderController::class, 'destroy'])->name('order.delete');
+    Route::delete('/orders/deleteSelected', [OrderController::class, 'deleteSelected'])->name('orders.deleteSelected');
     Route::put('/order/update/status', [OrderController::class, 'update_status'])->name('order.update.status');
 
     #home page Slides
@@ -194,7 +196,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/inactive/deals/{id}', [HotDealController::class, 'inactiveDeals'])->name('inactive.deals');
     Route::get('/edit/deals/{id}', [HotDealController::class, 'edit'])->name('edit.deals');
     Route::post('/update/deals/{id}', [HotDealController::class, 'update'])->name('update.deals');
-
 
     #Latest Type
     Route::get('/add/type', [TypeCOntroller::class, 'create'])->name('add.type');
@@ -231,7 +232,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit/about/{id}', [AboutController::class, 'edit'])->name('edit.about');
     Route::post('/update/about/{id}', [AboutController::class, 'update'])->name('update.about');
 
-    #user section 
+    #user section
     Route::get('/admin/users', [AdminController::class, 'admin_users'])->name('admin.users');
     Route::post('/admin/delete/{id}', [AdminController::class, 'destroy'])->name('delete.admin');
     Route::get('/add/admin', [AdminController::class, 'create'])->name('add.admin');
@@ -247,12 +248,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/add/logo', [AdminController::class, 'add_logo'])->name('add.logo');
     Route::post('/update/logo', [AdminController::class, 'update_logo'])->name('update.logo');
 
-    #search 
+    #search
     Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
     Route::get('/get-notifications', [AdminController::class, 'getNotifications']);
     Route::get('/messages/mark-as-read', [MessageController::class, 'markAsRead'])->name('messages.markAsRead');
-
-
 
     #footer section
     Route::get('/add/faddress', [FaddressController::class, 'create'])->name('add.faddress');

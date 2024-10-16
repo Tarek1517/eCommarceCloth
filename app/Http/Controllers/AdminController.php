@@ -37,41 +37,6 @@ class AdminController extends Controller
 
         DB::statement("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 
-        $data['earningsData'] = DB::select("
-                                SELECT
-                                    MONTHNAME(created_at) AS month,
-                                    YEAR(created_at) AS year,
-                                    SUM(total) AS TotalRevenue,
-                                    COUNT(id) AS TotalOrders
-                                FROM orders
-                                WHERE status = 'delivered'
-                                GROUP BY YEAR(created_at), MONTH(created_at)
-                                ORDER BY YEAR(created_at), MONTH(created_at)
-        ");
-
-        $totalRevenue = 0;
-        foreach ($data['earningsData'] as $earning) {
-            $totalRevenue += $earning->TotalRevenue;
-        }
-        $data['totalRevenue'] = $totalRevenue;
-
-        $TotalOrders = 0;
-        foreach ($data['earningsData'] as $earning) {
-            $TotalOrders += $earning->TotalOrders;
-        }
-        $data['TotalOrders'] = $TotalOrders;
-
-        $revenueData = [];
-        $orderData = [];
-
-        foreach ($data['earningsData'] as $earning) {
-            $revenueData[] = $earning->TotalRevenue;
-            $orderData[] = $earning->TotalOrders;
-        }
-
-        $data['revenueData'] = implode(',', $revenueData);
-        $data['orderData'] = implode(',', $orderData);
-
         return view('pages.dashboard', $data);
 
     }

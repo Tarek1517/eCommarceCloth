@@ -417,7 +417,7 @@
 
         <div class="text-center mt-2">
             <a class="btn-link btn-link_lg default-underline text-uppercase fw-medium"
-                href="{{ route('index.shop') }}">Load More</a>
+                href="{{ route('index.shop') }}">Shop Now</a>
         </div>
     </section>
     </div>

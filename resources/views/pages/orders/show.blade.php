@@ -122,15 +122,22 @@
                                     <td class="text-center">{{ $item->product->SKU }}</td>
                                     <td class="text-center">{{ $item->product->category->name }}</td>
                                     <td class="text-center">{{ $item->product->brand->name }}</td>
+                                    @php
+                                        $options = json_decode($item->options); // Decode options from JSON
+                                    @endphp
                                     <td class="text-center">
-                                        @foreach ($item->product->color as $Color)
-                                            {{ $Color->name . ', ' }}
-                                        @endforeach
+                                        @if (isset($options->color_id))
+                                            {{ \App\Models\Color::find($options->color_id)->name ?? 'N/A' }}
+                                        @else
+                                            N/A
+                                        @endif
                                     </td>
                                     <td class="text-center">
-                                        @foreach ($item->product->size as $size)
-                                            {{ $size->name . ', ' }}
-                                        @endforeach
+                                        @if (isset($options->size_id))
+                                            {{ \App\Models\Size::find($options->size_id)->name ?? 'N/A' }}
+                                        @else
+                                            N/A
+                                        @endif
                                     </td>
                                     <td class="text-center">{{ $item->rstatus == 0 ? 'NO' : 'YES' }}</td>
                                 </tr>

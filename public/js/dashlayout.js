@@ -290,3 +290,32 @@ function fetchNotifications() {
                 data.newMessagesCount;
         });
 }
+
+$(document).ready(function() {
+    // Select All functionality
+    $("#select_all_ids").click(function() {
+        $(".checkbox_ids").prop("checked", $(this).prop("checked"));
+    });
+
+    // If any checkbox is unchecked, uncheck the "Select All" checkbox
+    $(".checkbox_ids").click(function() {
+        if (!$(this).prop("checked")) {
+            $("#select_all_ids").prop("checked", false);
+        }
+    });
+
+    // Trigger form submission when the delete button is clicked
+    $("#deleteAllselecteds").click(function() {
+        if ($("input[name='ids[]']:checked").length > 0) {
+            if (confirm('Are you sure you want to delete the selected orders?')) {
+                $("#deleteOrdersForm").submit(); // Submit the form
+            }
+        } else {
+            alert('No orders selected');
+        }
+    });
+});
+
+
+
+

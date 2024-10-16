@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use \App\Models\Order;
 use \App\Models\OrderItem;
 use \App\Models\Transaction;
-use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -102,13 +102,35 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
+        // Find the order by ID
         $order = Order::find($id);
 
         if ($order) {
+
+            OrderItem::where('order_id', $order->id)->delete();
+
             $order->delete();
-            return redirect()->route('order.lists')->with('success', 'Order deleted successfully');
+
+            return redirect()->route('order.lists')->with('success', 'Order and related items deleted successfully');
         }
 
         return redirect()->route('order.lists')->with('error', 'Order not found');
     }
+
+    public function deleteSelected(Request $request)
+    {
+        $ids = $request->input('ids');
+
+        if (!empty($ids)) {
+
+            OrderItem::whereIn('order_id', $ids)->delete();
+
+            Order::whereIn('id', $ids)->delete();
+
+            return redirect()->back()->with('success', 'Orders and associated items deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'No orders selected.');
+        }
+    }
+
 }

@@ -13,7 +13,6 @@ use \App\Models\Products;
 use \App\Models\Review;
 use \App\Models\Size;
 
-
 class ProductController extends Controller
 {
     /**
@@ -292,6 +291,20 @@ class ProductController extends Controller
     {
         Review::findOrFail($id)->delete();
         return redirect()->route('product.review')->with('success', 'Review Delete Successfully');
+    }
+
+    public function deleteSelected(Request $request)
+    {
+        $ids = $request->input('ids');
+
+        if (!empty($ids)) {
+            GalleryImage::whereIn('product_id', $ids)->delete();
+            Products::whereIn('id', $ids)->delete();
+
+            return redirect()->back()->with('success', 'Products and associated items deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'No Products selected.');
+        }
     }
 
 }

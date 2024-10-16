@@ -22,6 +22,7 @@
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
 
 </head>
@@ -111,25 +112,45 @@
                                                 <i class="fa-solid fa-envelope"></i>
                                             </span>
                                         </button>
-                                        <ul class="dropdown-menu dropdown-menu-end has-content"
-                                            aria-labelledby="dropdownMenuButton2">
-                                            <li>
-                                                <div class="message-item item-2">
-                                                    <div class="image">
-                                                        <i class="fa-solid fa-comments"></i>
-                                                    </div>
-                                                    <div>
-                                                        <a href="{{ route('messages.markAsRead') }}">
+                                        @if ($newMessagesCount == 0)
+                                            <ul class="dropdown-menu dropdown-menu-end has-content"
+                                                aria-labelledby="dropdownMenuButton2">
+                                                <li>
+                                                    <div class="message-item item-2">
+                                                        <div class="image">
+                                                            <i class="fa-solid fa-comments"></i>
+                                                        </div>
+                                                        <div>
                                                             <div class="body-title-2">New Message</div>
                                                             <div class="text-tiny mt-1">You have
                                                                 {{ $newMessagesCount }}
                                                                 new
                                                                 Message(s)</div>
-                                                        </a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                                </li>
+                                            </ul>
+                                        @else
+                                            <ul class="dropdown-menu dropdown-menu-end has-content"
+                                                aria-labelledby="dropdownMenuButton2">
+                                                <li>
+                                                    <div class="message-item item-2">
+                                                        <div class="image">
+                                                            <i class="fa-solid fa-comments"></i>
+                                                        </div>
+                                                        <div>
+                                                            <a href="{{ route('messages.markAsRead') }}">
+                                                                <div class="body-title-2">New Message</div>
+                                                                <div class="text-tiny mt-1">You have
+                                                                    {{ $newMessagesCount }}
+                                                                    new
+                                                                    Message(s)</div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="popup-wrap message type-header p-2 mt-2">
@@ -141,24 +162,42 @@
                                                 <i class="icon-bell"></i>
                                             </span>
                                         </button>
-                                        <ul class="dropdown-menu dropdown-menu-end has-content"
-                                            aria-labelledby="dropdownMenuButton2">
-
-                                            <li>
-                                                <div class="message-item item-1">
-                                                    <div class="image">
-                                                        <i class="fa-solid fa-globe"></i>
-                                                    </div>
-                                                    <div>
-                                                        <a href="{{ route('order.lists') }}">
+                                        @if ($newOrdersCount == 0)
+                                            <ul class="dropdown-menu dropdown-menu-end has-content"
+                                                aria-labelledby="dropdownMenuButton2">
+                                                <li>
+                                                    <div class="message-item item-1">
+                                                        <div class="image">
+                                                            <i class="fa-solid fa-globe"></i>
+                                                        </div>
+                                                        <div>
                                                             <div class="body-title-2">New Orders</div>
                                                             <div class="text-tiny mt-1">{{ $newOrdersCount }} new
                                                                 Order(s) Pending</div>
-                                                        </a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                                </li>
+                                            </ul>
+                                        @else
+                                            <ul class="dropdown-menu dropdown-menu-end has-content"
+                                                aria-labelledby="dropdownMenuButton2">
+
+                                                <li>
+                                                    <div class="message-item item-1">
+                                                        <div class="image">
+                                                            <i class="fa-solid fa-globe"></i>
+                                                        </div>
+                                                        <div>
+                                                            <a href="{{ route('order.lists') }}">
+                                                                <div class="body-title-2">New Orders</div>
+                                                                <div class="text-tiny mt-1">{{ $newOrdersCount }} new
+                                                                    Order(s) Pending</div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="popup-wrap user type-header">

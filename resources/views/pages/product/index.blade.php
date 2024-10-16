@@ -33,13 +33,22 @@
                             </div>
                         </form>
                     </div>
+                    <button type="button" class="tf-button style-1 w208" id="deleteAllselecteds">
+                        <i class="fa-solid fa-trash"></i> Delete Selected
+                    </button>
                     <a class="tf-button style-1 w208" href="{{ route('add.product') }}"><i class="icon-plus"></i>Add new</a>
                 </div>
 
                 <div class="table-responsive">
+                    <form action="{{ route('products.deleteSelected') }}" method="POST" id="deleteOrdersForm">
+                        @csrf
+                        @method('DELETE')
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
+                                <th class="text-center" style="width:50px">
+                                    <input type="checkbox" id="select_all_ids" class="checkbox_ids_header">
+                                </th>
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Price</th>
@@ -57,6 +66,10 @@
                         <tbody>
                             @foreach ($allProducts as $Product)
                                 <tr>
+                                    <td class="text-center">
+                                        <input type="checkbox" name="ids[]" value="{{ $Product->id }}"
+                                            class="checkbox_ids">
+                                    </td>
                                     <td>#{{ $Product->id }}</td>
                                     <td class="pname pb-4 pt-4">
                                         <div class="name">
@@ -101,6 +114,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                </form>
                 </div>
                 <div class="divider"></div>
                 <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
