@@ -24,11 +24,20 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // Authenticate the user
         $request->authenticate();
 
+        // Regenerate session
         $request->session()->regenerate();
 
-        return redirect()->intended(route('admin.dashboard', absolute: false));
+        // Check if the user's status is 'approved'
+        if (Auth::user()->status == 'approved') {
+            // Redirect to the intended dashboard if the status is approved
+            return redirect()->intended(route('admin.dashboard'));
+        } else {
+            // Otherwise, redirect to the brand list
+            return redirect()->route('unapproved.admin');
+        }
     }
 
     /**

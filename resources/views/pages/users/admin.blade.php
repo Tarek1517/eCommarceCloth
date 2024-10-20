@@ -39,84 +39,62 @@
                 <div class="wg-table table-all-user">
 
                     <div class="table-responsive">
-                        @if (Auth::user()->u_type === 'administrator')
-                            <table class="table table-striped table-bordered">
-                                <thead>
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($AdminUsers as $Admusers)
                                     <tr>
-                                        <th>#</th>
-                                        <th>Image</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($AdminUsers as $Admusers)
-                                        <tr>
-                                            <td>{{ $loop->index + 1 }}</td>
-                                            <td class="pname">
-                                                <div class="image">
-                                                    <img src="{{ url('/storage/img/' . $Admusers->image) }}" alt=""
-                                                        class="image">
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td class="pname">
+                                            <div class="image">
+                                                <img src="{{ url('/storage/img/' . $Admusers->image) }}" alt=""
+                                                    class="image">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="name">
+                                                <a href="#" class="body-title-2">{{ $Admusers->name }}</a>
+                                            </div>
+                                        </td>
+                                        <td>{{ $Admusers->email }}</td>
+                                        <td class="align-middle"> <span
+                                                class="bg-{{ $Admusers->status === 'approved' ? 'success' : 'warning' }} px-2 py-1 rounded text-white text-[12px]">
+                                                {{ ucfirst($Admusers->status) }} </span></td>
+                                        <td>
+                                            @if ($Admusers->u_type === 'admin')
+                                                <div class="list-icon-function">
+                                                    @if ($Admusers->status === 'approved')
+                                                        <a href="{{ route('pending.admin', $Admusers->id) }}" title="Pending" class="btn btn-warning"><i
+                                                                class="fa-regular fa-thumbs-down"></i></a>
+                                                    @else
+                                                        <a href="{{ route('approved.admin', $Admusers->id) }}" title="Active" class="btn btn-success"><i
+                                                                class="fa-regular fa-thumbs-up"></i></a>
+                                                    @endif
+                                                    <a href="#" data-id="{{ $Admusers->id }}" data-bs-toggle="modal"
+                                                        data-bs-target="#deleteAdmin" class="open-delete-modal">
+                                                        <div class="item text-danger delete">
+                                                            <i class="icon-trash-2"></i>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <div class="name">
-                                                    <a href="#" class="body-title-2">{{ $Admusers->name }}</a>
-                                                </div>
-                                            </td>
-                                            <td>{{ $Admusers->email }}</td>
-                                            <td>
-                                                @if ($Admusers->u_type === 'admin')
-                                                    <div class="list-icon-function">
-                                                        <a href="#" data-id="{{ $Admusers->id }}"
-                                                            data-bs-toggle="modal" data-bs-target="#deleteAdmin"
-                                                            class="open-delete-modal">
-                                                            <div class="item text-danger delete">
-                                                                <i class="icon-trash-2"></i>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                @else
+                                            @else
                                                 <span class="bg-success text-white p-2">Administrator</span>
-                                                @endif
-                                            </td>
+                                            @endif
+                                        </td>
 
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        @else
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Image</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($AdminUsers as $Ausers)
-                                        <tr>
-                                            <td>{{ $loop->index + 1 }}</td>
-                                            <td class="pname">
-                                                <div class="image">
-                                                    <img src="{{ url('/storage/img/' . $Ausers->image) }}" alt=""
-                                                        class="image">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="name">
-                                                    <a href="#" class="body-title-2">{{ $Ausers->name }}</a>
-                                                </div>
-                                            </td>
-                                            <td>{{ $Ausers->email }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        @endif
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
@@ -142,7 +120,8 @@
                         @csrf
                         <!-- Password field -->
                         <div class="mb-3" style="padding-bottom:25px;">
-                            <label for="old_password" class="form-label pb-2 fs-4">Password <span class="text-danger">*</span></label>
+                            <label for="old_password" class="form-label pb-2 fs-4">Password <span
+                                    class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="old_password" name="old_password"
                                 placeholder="Type password" required>
                         </div>
@@ -166,6 +145,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

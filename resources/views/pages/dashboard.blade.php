@@ -138,7 +138,7 @@
                             <a href="{{ route('add.product') }}"
                                 class="d-flex flex-column justify-content-center align-items-center hover-bg-primary-light box-padding">
                                 <dotlottie-player
-                                    src="https://lottie.host/0ee41426-9e25-4de6-b44f-f73315753c0e/mEANrrBRsj.json"
+                                    src="https://lottie.host/48200112-4fb7-4e1d-8e3d-54cffdb6b441/EbOArIlrP4.json"
                                     background="transparent" speed="1" style="width: 120px; height: 120px"
                                     direction="1" playMode="normal" loop autoplay>
                                 </dotlottie-player>
@@ -149,7 +149,7 @@
                             <a href="{{ route('add.category') }}"
                                 class="d-flex flex-column justify-content-center align-items-center hover-bg-primary-light box-padding">
                                 <dotlottie-player
-                                    src="https://lottie.host/fbd757a3-6b04-4bb8-9b86-2442d23a9dff/lCDk41zjBP.json"
+                                    src="https://lottie.host/1d90e9de-40d9-4b2d-bd12-2cc9b423d104/ulNa5bk5v7.json"
                                     background="transparent" speed="1" style="width: 120px; height: 120px"
                                     direction="1" playMode="normal" loop autoplay>
                                 </dotlottie-player>

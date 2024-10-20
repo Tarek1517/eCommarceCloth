@@ -26,15 +26,15 @@ use App\Http\Controllers\ShopSliderController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SlidesController;
 use App\Http\Controllers\TypeCOntroller;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Customer\Auth\PasswordResetController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -94,6 +94,46 @@ Route::post('/submit/login', [Home::class, 'loginSubmit'])->name('submit.login')
 Route::post('/store/customer', [Home::class, 'store'])->name('store.customer');
 Route::post('/submit/login', [Home::class, 'loginSubmit'])->name('submit.login');
 
+// Route to show the verification notice
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth:customer')->name('customer.verification.notice');
+
+// Handle the email verification after the user clicks the verification link
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/Customer/login')->with('success', 'Your email has been successfully verified!');
+})->middleware(['auth:customer', 'signed'])->name('customer.verification.verify'); // Changed the name here
+
+// Resend the verification link
+Route::post('/email/resend', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth:customer'])->name('customer.verification.resend');
+
+// Customer password reset routes
+
+// Show the form to request a password reset link
+Route::get('customer/password/reset', [PasswordResetController::class, 'showLinkRequestForm'])
+    ->name('customer.password.request');
+
+// Send the reset link
+Route::post('customer/password/email', [PasswordResetController::class, 'sendResetLinkEmail'])
+    ->name('customer.password.email');
+
+// Show the password reset form
+Route::get('customer/password/reset/{token}', [PasswordResetController::class, 'showResetForm'])
+    ->name('customer.password.reset');
+
+// Handle the password reset
+Route::post('customer/password/reset', [PasswordResetController::class, 'reset'])
+    ->name('customer.password.update');
+
+
+
+
 Route::middleware('auth:customer')->group(function () {
 
     Route::get('/customer/dashboard', [CustomerController::class, 'index'])->name('customer.dashboard');
@@ -109,6 +149,8 @@ Route::middleware('auth:customer')->group(function () {
     Route::get('/customer/wishlist', [CustomerController::class, 'wishlist'])->name('customer.wishlist');
 
 });
+ 
+Route::get('/unapproved/admin', [AdminController::class, 'unapprovedAdmin'])->name('unapproved.admin');
 
 Route::middleware('auth')->group(function () {
 
@@ -237,6 +279,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/delete/{id}', [AdminController::class, 'destroy'])->name('delete.admin');
     Route::get('/add/admin', [AdminController::class, 'create'])->name('add.admin');
     Route::POST('/store/admin', [AdminController::class, 'store'])->name('store.admin');
+    Route::get('/approved/admin/{id}', [AdminController::class, 'approvedAdmin'])->name('approved.admin');
+    Route::get('/pending/admin/{id}', [AdminController::class, 'pendingAdmin'])->name('pending.admin');
 
     Route::get('/customer/users', [AdminController::class, 'customer_users'])->name('customer.users');
     Route::get('/delete/customer/{id}', [AdminController::class, 'destroy_customer'])->name('delete.customer');

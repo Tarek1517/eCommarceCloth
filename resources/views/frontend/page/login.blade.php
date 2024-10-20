@@ -35,6 +35,10 @@
           <button class="btn btn-primary w-100 text-uppercase" type="submit">Log In</button>
 
           <div class="customer-option mt-4 text-center">
+            <a href="{{ route('customer.password.request') }}" class="btn-text js-show-register">Forgot Your Password?</a>
+          </div>
+
+          <div class="customer-option mt-1 text-center">
             <span class="text-secondary">No account yet?</span>
             <a href="{{route('customer.register')}}" class="btn-text js-show-register">Create Account</a>
           </div>

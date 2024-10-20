@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use \App\Models\ContactForm;
 use \App\Models\Customer;
 use \App\Models\Order;
 use \App\Models\Products;
 use \App\Models\SiteLogo;
 use \App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -162,10 +162,8 @@ class AdminController extends Controller
                 'email',
                 function ($attribute, $value, $fail) use ($id) {
                     if ($value) {
-
                         $customerExists = Customer::where('email', $value)->where('id', '!=', $id)->exists();
                         $userExists = User::where('email', $value)->where('id', '!=', $id)->exists();
-
                         if ($customerExists || $userExists) {
                             $fail('The email is already taken in either customers or users!');
                         }
@@ -196,20 +194,18 @@ class AdminController extends Controller
                     ->with('error', 'Failed to update details. Incorrect old password.');
             }
 
-            $data['password'] = bcrypt($request->new_password);
+            $data['password'] = Hash::make($request->new_password);
         }
 
         if ($request->file('image')) {
-
             $shopSlide = User::findOrFail($id);
 
-            $image_path = storage_path('app/public/img/' . $shopSlide->image);
-
-            if (file_exists($image_path)) {
-                unlink($image_path);
+            if ($shopSlide->image && Storage::exists('public/img/' . $shopSlide->image)) {
+                Storage::delete('public/img/' . $shopSlide->image);
             }
+
             $img_file = $request->file('image');
-            $image_name = Str::random(20);
+            $image_name = time();
             $ext = strtolower($img_file->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
             $img_file->storeAs('public/img/', $image_full_name);
@@ -293,6 +289,28 @@ class AdminController extends Controller
         $logo->update($data);
 
         return redirect()->route('add.logo')->with('success', 'Logo has been saved successfully.');
+    }
+
+    public function pendingAdmin($id)
+    {
+
+        User::where('id', $id)->update(['status' => 'pending']);
+
+        return redirect()->route('admin.users');
+
+    }
+
+    public function approvedAdmin($id)
+    {
+        User::where('id', $id)->update(['status' => 'approved']);
+
+        return redirect()->route('admin.users');
+
+    }
+
+    public function unapprovedAdmin()
+    {
+        return view('pages.pendingUser');
     }
 
 }

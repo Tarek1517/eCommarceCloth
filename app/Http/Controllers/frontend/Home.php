@@ -62,8 +62,9 @@ class Home extends Controller
      */
     public function store(Request $request)
     {
+        // Validate the incoming request data
         $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string|max:255',
             'email' => [
                 'required',
                 'email',
@@ -76,20 +77,25 @@ class Home extends Controller
                     }
                 },
             ],
-            'mobile' => 'required|string',
-            'password' => 'required|string|confirmed',
+            'mobile' => 'required|string|max:15',
+            'password' => 'required|string|confirmed|min:8',
         ]);
 
-        // Extract the validated data
+        // Extract validated data
         $data = $request->only(['name', 'email', 'mobile']);
         $data['password'] = Hash::make($request->password);
 
-        $user = Customer::create($data);
+        // Create the customer
+        $customer = Customer::create($data);
 
-        if ($user) {
-            return redirect()->route('customer.register')->with('success', 'Your registration is complete');
+        // Optionally send email verification notification
+        if ($customer) {
+            // If email verification is required
+            $customer->sendEmailVerificationNotification();
+
+            return redirect()->route('customer.register')->with('success', 'Your registration is complete. Please verify your email.');
         } else {
-            return redirect()->route('customer.register')->with('error', 'Registration failed');
+            return redirect()->route('customer.register')->with('error', 'Registration failed.');
         }
     }
 

@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\CustomerResetPasswordNotification;
 
-class Customer extends Authenticatable
+class Customer extends Authenticatable implements CanResetPassword
 {
     use HasFactory, Notifiable;
 
@@ -20,7 +21,7 @@ class Customer extends Authenticatable
         'name',
         'email',
         'password',
-        'mobile'
+        'mobile',
     ];
 
     /**
@@ -34,15 +35,24 @@ class Customer extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        $this->notify(new CustomerResetPasswordNotification($token));
     }
 }
+

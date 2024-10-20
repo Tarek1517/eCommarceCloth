@@ -128,6 +128,21 @@ $(document).ready(function () {
             return false;
         }
     });
+
+    $("#password_confirmation").keyup(function () {
+        let Pass = $("#password").val();
+        let conPass = $("#password_confirmation").val();
+
+        if (Pass != conPass) {
+            $("#confirm_password").html("Password not matching");
+            $("#confirm_password").css("color", "red");
+            return false;
+        } else {
+            $("#confirm_password").html("Password matched");
+            $("#confirm_password").css("color", "green");
+            return false;
+        }
+    });
 });
 
 $(document).ready(function () {
