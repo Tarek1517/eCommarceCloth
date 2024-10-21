@@ -273,21 +273,6 @@ form.form-style-2>*>*:first-child {
     margin-top: 40px;
 }
 
-/* Description Field */
-.description {
-    display: block;
-    /* Makes the description field a block element */
-    width: 100%;
-    /* Makes it take full width of the parent container */
-    margin-bottom: 20px !important;
-    /* Adds space below */
-    box-sizing: border-box;
-    /* Includes padding and borders within the width */
-    display: flex;
-    /* Makes the elements align properly in the column */
-    flex-direction: column;
-}
-
 /* Quill Editor Styling */
 #editor {
     min-height: 250px;

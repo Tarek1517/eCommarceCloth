@@ -60,7 +60,7 @@
 
           <div class="customer-option mt-4 text-center">
             <span class="text-secondary">Have an account?</span>
-            <a href="{{ route('Customer.login') }}" class="btn-text js-show-register">Login to your Account</a>
+            <a href="{{ route('Customer.login') }}" class="btn-text">Login to your Account</a>
           </div>
         </form>
       </div>

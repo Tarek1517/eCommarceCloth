@@ -47,21 +47,6 @@ img.pc__img {
     color: #FF0000;
 }
 
-.qty-control__reduce_cart,
-.qty-control__increase_cart {
-    position: absolute;
-    top: 0;
-    width: .75rem;
-    padding: 0;
-    cursor: pointer;
-    user-select: none;
-    -ms-user-select: none;
-}
-
-.qty-control__reduce {
-    left: 0;
-}
-
 .coupon-massege, .text-success {
     color: #33b206 !important;
 }

@@ -85,25 +85,38 @@ class wishlistController extends Controller
         return redirect()->back();
     }
 
-    public function move_to_cart($rowId)
+    public function moveToCart(Request $request, $rowId)
     {
-        $item = Cart::instance('wishlist')->get($rowId);
+        $request->validate([
+            'size_id' => 'required|exists:sizes,id',
+            'color_id' => 'required|exists:colors,id',
+        ]);
 
+        // Retrieve the wishlist item
+        $wishlistItem = Cart::instance('wishlist')->get($rowId);
+
+        // Extract the path of the first gallery image
+        $galleryImages = !empty($wishlistItem->options->galleryImages[0]['path'])
+        ? [$wishlistItem->options->galleryImages[0]['path']]
+        : [];
+
+        // Add to cart with selected size, color, and gallery image path
+        Cart::instance('cart')->add([
+            'id' => $wishlistItem->id,
+            'name' => $wishlistItem->name,
+            'qty' => $request->quantity,
+            'price' => $wishlistItem->price,
+            'options' => [
+                'size_id' => $request->size_id,
+                'color_id' => $request->color_id,
+                'galleryImages' => $galleryImages,
+            ],
+        ]);
+
+        // Remove the item from the wishlist
         Cart::instance('wishlist')->remove($rowId);
 
-        $wish = Cart::instance('cart')->add([
-
-            'id' => $item->id,
-            'name' => $item->name,
-            'qty' => 1,
-            'price' => $item->price,
-            'options' => [
-                'color_id' => $item->options->color_id,
-                'size_id' => $item->options->size_id,
-                'galleryImages' => $item->options->galleryImages,
-            ],
-
-        ])->associate(Products::class);
         return redirect()->back();
     }
+
 }

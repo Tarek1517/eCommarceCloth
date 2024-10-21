@@ -171,7 +171,7 @@
                                 </div>
                                 <div>
                                     <span class="text-secondary">Max Price: </span>
-                                    <span class="price-range__max">$1000</span>
+                                    <span class="price-range__max">$500</span>
                                 </div>
                             </div>
                         </div>
@@ -395,7 +395,7 @@
                                             @method('DELETE')
                                             <input type="hidden" name="id" value="{{ $Product->id }}">
                                             <button
-                                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-remove-wishlist filled-heart"
+                                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 filled-heart"
                                                 title="Remove From Wishlist">
                                                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -413,7 +413,7 @@
                                             <input type="hidden" name="price"
                                                 value="{{ $Product->sale_price == '' ? $Product->regular_price : $Product->sale_price }}">
                                             <button
-                                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
+                                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0"
                                                 title="Add To Wishlist">
                                                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -484,16 +484,16 @@
         </section>
     </main>
     <form action="{{ route('index.shop') }}" method="get" id="frmFilter">
-        {{-- @csrf --}}
+
         <input type="hidden" name="page" value="{{ $shopProducts->currentPage() }}">
         <input type="hidden" name="order" id="order" value="{{ $order }}">
         <input type="hidden" name="brands" id="brands">
         <input type="hidden" name="categories" id="categories">
+        <input type="hidden" name="min" id="min" value="{{ $min_price }}">
+        <input type="hidden" name="max" id="max" value="{{ $max_price }}">
         <input type="hidden" name="sizes" id="sizes">
         <input type="hidden" id="colors" name="colors" value="{{ request('colors') }}">
         <input type="hidden" id="selectedColor" name="selectedColor" value="{{ request('selectedColor') }}">
-        <input type="hidden" name="min" id="min" value="{{ $min_price }}">
-        <input type="hidden" name="max" id="max" value="{{ $max_price }}">
 
     </form>
 @endsection

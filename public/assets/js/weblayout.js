@@ -4,10 +4,10 @@ $(document).ready(function () {
         $("#wishlist-form").submit();
     });
 
-    $(".qty-control__reduce_cart").on("click", function () {
+    $(".qty-control__reduce").on("click", function () {
         $(this).closest("form").submit();
     });
-    $(".qty-control__increase_cart").on("click", function () {
+    $(".qty-control__increase").on("click", function () {
         $(this).closest("form").submit();
     });
 
@@ -48,11 +48,11 @@ $(document).ready(function () {
 
     $("[name='price_range']").on("change", function () {
         const [minValue, maxValue] = $(this).val().split(",");
+
         $("#min").val(minValue);
         $("#max").val(maxValue);
 
         clearTimeout($.data(this, "timer"));
-
         const timer = setTimeout(() => {
             $("#frmFilter").submit();
         }, 2000);
@@ -210,9 +210,15 @@ document.querySelectorAll(".star-rating__star-icon").forEach(function (star) {
     });
 });
 
-document.querySelector(".to-share").addEventListener("click", function () {
-    const shareButtons = document.querySelector(".social-share-buttons");
-    shareButtons.hidden = !shareButtons.hidden; // Toggle visibility
+$(document).ready(function () {
+    // Check if the element with class .to-share exists
+    if ($(".to-share").length) {
+        // Attach a click event listener using jQuery
+        $(".to-share").on("click", function () {
+            // Toggle the visibility of the element with class .social-share-buttons
+            $(".social-share-buttons").toggle(); // This will show/hide the element
+        });
+    }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -221,11 +227,63 @@ document.addEventListener("DOMContentLoaded", function () {
     const sizeIdInput = document.getElementById("sizeIdInput");
     const colorIdInput = document.getElementById("colorIdInput");
 
-    sizeSelect.addEventListener("change", function () {
-        sizeIdInput.value = this.value;
-    });
+    // Check if sizeSelect exists before adding event listener
+    if (sizeSelect) {
+        sizeSelect.addEventListener("change", function () {
+            sizeIdInput.value = this.value;
+        });
+    } 
 
-    colorSelect.addEventListener("change", function () {
-        colorIdInput.value = this.value;
-    });
+    // Check if colorSelect exists before adding event listener
+    if (colorSelect) {
+        colorSelect.addEventListener("change", function () {
+            colorIdInput.value = this.value;
+        });
+    } 
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("addTowishModal");
+
+    if (modal) {
+        modal.addEventListener("show.bs.modal", function (event) {
+            const button = event.relatedTarget; // Button that triggered the modal
+
+            // Extract rowId and other data from the button
+            const rowId = button.getAttribute("data-id");
+            const productName = button.getAttribute("data-name");
+            const productPrice = button.getAttribute("data-price");
+            const options = JSON.parse(button.getAttribute("data-options"));
+
+            // Set the form's action URL with the correct rowId
+            const form = document.getElementById("addToCartForm");
+            form.setAttribute("action", `/move-to-cart/${rowId}`);
+
+            // Populate size select
+            const sizeSelect = document.getElementById("sizeSelect");
+            sizeSelect.innerHTML = '<option value="">Select Size</option>'; // Reset options
+            options.size_id.forEach((size) => {
+                const option = document.createElement("option");
+                option.value = size.id;
+                option.textContent = size.name;
+                sizeSelect.appendChild(option);
+            });
+
+            // Populate color select
+            const colorSelect = document.getElementById("colorSelect");
+            colorSelect.innerHTML = '<option value="">Select Color</option>'; // Reset options
+            options.color_id.forEach((color) => {
+                const option = document.createElement("option");
+                option.value = color.id;
+                option.textContent = color.name;
+                colorSelect.appendChild(option);
+            });
+
+            // Set hidden fields in the form
+            document.querySelector('input[name="id"]').value = rowId;
+            document.querySelector('input[name="name"]').value = productName;
+            document.querySelector('input[name="price"]').value = productPrice;
+        });
+    }
+});
+

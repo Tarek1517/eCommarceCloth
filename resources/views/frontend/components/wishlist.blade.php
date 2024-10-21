@@ -61,11 +61,14 @@
                                         </td>
 
                                         <td>
-                                            <form action="{{ route('move.to.cart', $wishlist->rowId) }}" method="post">
-                                                @csrf
-                                                <button type="submit" class="remove-cart btn btn-sm btn-primary">Move to
-                                                    Cart</button>
-                                            </form>
+                                            <a href="#" class="btn remove-cart btn btn-sm btn-primary"
+                                                data-id="{{ $wishlist->rowId }}" data-name="{{ $wishlist->name }}"
+                                                data-price="{{ $wishlist->sale_price ?: $wishlist->regular_price }}"
+                                                data-options='@json($wishlist->options)' data-bs-toggle="modal"
+                                                data-bs-target="#addTowishModal">
+                                                Move to Cart
+                                            </a>
+
                                         </td>
 
                                         <td>
@@ -89,6 +92,50 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="addTowishModal" tabindex="-1" aria-labelledby="addToCartLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addToCartLabel">Select Color and Size</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Form inside the modal -->
+                                        <form name="addtocart-form" id="addToCartForm" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <input type="hidden" name="name">
+                                            <input type="hidden" name="price">
+
+                                            <div class="meta-item">
+                                                <label>Size:</label>
+                                                <select id="sizeSelect" class="mt-2 border border-1 form-control"
+                                                    name="size_id">
+                                                    <option value="">Select Size</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="meta-item mt-3">
+                                                <label>Color:</label>
+                                                <select id="colorSelect" class="mt-2 border border-1 form-control"
+                                                    name="color_id">
+                                                    <option value="">Select Color</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mt-4">
+                                                <button type="submit" class="btn btn-primary">Move To Cart</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <form action="{{ route('clear.wishlist') }}" method="post">
                             @csrf

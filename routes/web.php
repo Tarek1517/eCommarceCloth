@@ -56,7 +56,8 @@ Route::delete('/wishlist/remove', [WishlistController::class, 'remove'])->name('
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('index.wishlist');
 Route::DELETE('/wishlist/remove/item/{rowId}', [WishlistController::class, 'destroy'])->name('wishlist.destroy.item');
 Route::DELETE('/wishlist/clear/item', [WishlistController::class, 'clear_wishlist'])->name('clear.wishlist');
-Route::post('/move/to/cart/{rowId}', [wishlistController::class, 'move_to_cart'])->name('move.to.cart');
+Route::post('/move-to-cart/{rowId}', [WishlistController::class, 'moveToCart'])->name('move.to.cart');
+
 
 #cart route
 Route::get('/cart', [CartController::class, 'index'])->name('index.cart');

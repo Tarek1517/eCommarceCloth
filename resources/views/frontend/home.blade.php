@@ -270,7 +270,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <input type="hidden" name="id" value="{{ $sProduct->id }}">
-                                        <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist filled-heart"
+                                        <button class="pc__btn-wl bg-transparent border-0 filled-heart"
                                             title="Add To Wishlist">
                                             <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -287,7 +287,7 @@
                                         <input type="hidden" name="quantity" value="1">
                                         <input type="hidden" name="price"
                                             value="{{ $sProduct->sale_price == '' ? $sProduct->regular_price : $sProduct->sale_price }}">
-                                        <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist"
+                                        <button class="pc__btn-wl bg-transparent border-0 "
                                             title="Add To Wishlist">
                                             <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -367,7 +367,7 @@
 
                             <div
                                 class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                                <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
+                                <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium "
                                     data-bs-toggle="modal" data-bs-target="#quickView" title="Quick view">
                                     <a href="{{ route('shop.product.details', ['product_slug' => $product->slug]) }}"
                                         class="d-none d-xxl-block">Quick View</a>
@@ -382,7 +382,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <input type="hidden" name="id" value="{{ $product->id }}">
-                                        <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist filled-heart"
+                                        <button class="pc__btn-wl bg-transparent border-0  filled-heart"
                                             title="Add To Wishlist">
                                             <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -399,7 +399,7 @@
                                         <input type="hidden" name="quantity" value="1">
                                         <input type="hidden" name="price"
                                             value="{{ $product->sale_price == '' ? $product->regular_price : $product->sale_price }}">
-                                        <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist"
+                                        <button class="pc__btn-wl bg-transparent border-0"
                                             title="Add To Wishlist">
                                             <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">

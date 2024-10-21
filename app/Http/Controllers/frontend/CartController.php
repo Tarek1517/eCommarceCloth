@@ -39,7 +39,6 @@ class CartController extends Controller
 
     public function add_to_cart(Request $request)
     {
-
         $request->validate([
             'id' => 'required|integer|exists:products,id',
             'quantity' => 'required|integer|min:1',
@@ -51,17 +50,29 @@ class CartController extends Controller
 
         $galleryImages = $product->galleryImages ? $product->galleryImages->pluck('path')->toArray() : [];
 
-        Cart::instance('cart')->add([
-            'id' => $product->id,
-            'name' => $product->name,
-            'qty' => $request->quantity,
-            'price' => $request->price,
-            'options' => [
-                'color_id' => $request->color_id,
-                'size_id' => $request->size_id,
-                'galleryImages' => $galleryImages,
-            ],
-        ])->associate(\App\Models\Products::class);
+        // Check if the same product with same size and color exists in the cart
+        $cartItem = Cart::instance('cart')->content()->where('id', $product->id)
+            ->where('options.color_id', $request->color_id)
+            ->where('options.size_id', $request->size_id)
+            ->first();
+
+        if ($cartItem) {
+            // If the product exists, update the quantity
+            Cart::instance('cart')->update($cartItem->rowId, $cartItem->qty + $request->quantity);
+        } else {
+            // If the product does not exist, add it to the cart
+            Cart::instance('cart')->add([
+                'id' => $product->id,
+                'name' => $product->name,
+                'qty' => $request->quantity,
+                'price' => $request->price,
+                'options' => [
+                    'color_id' => $request->color_id,
+                    'size_id' => $request->size_id,
+                    'galleryImages' => $galleryImages,
+                ],
+            ])->associate(\App\Models\Products::class);
+        }
 
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }

@@ -25,8 +25,8 @@ class ShopController extends Controller
         $filter_categories = $request->query('categories');
         $filter_sizes = $request->query('sizes');
         $filter_colors = $request->query('colors');
-        $min_price = $request->query('min', -1);
-        $max_price = $request->query('max', 500);
+        $min_price = $request->query('min') ? $request->query('min') : 1 ;
+        $max_price = $request->query('max') ? $request->query('max') : 500 ;
 
         $data['order'] = $order;
         $data['min_price'] = $min_price;
@@ -77,7 +77,7 @@ class ShopController extends Controller
             })
             ->where(function ($query) use ($min_price, $max_price) {
                 $query->whereBetween('regular_price', [$min_price, $max_price])
-                    ->orWhereBetween('sale_price', [$min_price, $max_price]);
+                      ->orWhereBetween('sale_price', [$min_price, $max_price]);
             })
             ->when($slug, function ($query) use ($slug) {
                 $query->whereHas('category', function ($query) use ($slug) {
