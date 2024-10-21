@@ -209,7 +209,7 @@
                 @foreach ($dealsProduct as $sProduct)
                     <div class="swiper-slide product-card product-card_style3">
                         <div class="pc__img-wrapper">
-                            <a href="details.html">
+                            <a href="{{ route('shop.product.details', ['product_slug' => $sProduct->slug]) }}">
                                 @if ($sProduct->galleryImages->isNotEmpty())
                                     @php
                                         $firstImage = $sProduct->galleryImages->first();
